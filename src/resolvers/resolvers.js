@@ -9,14 +9,20 @@ const resolversCovid = {
             }
             return queryDB("select * from provincia where id=?", id).then(data => data);
         },
-        casoscovid19(root, { id }) {
+        casoscovid(root, { id }) {
+            if (id == undefined) {
+                return queryDB("select * from casos_covid").then(data => data);
+            }
+            return queryDB("select * from casos_covid where id=?", id).then(data => data);
+        },
+        info_covid(root, { id }) {
             if (id == undefined) {
                 return queryDB("select * from info_covid19").then(data => data);
             }
             return queryDB("select * from info_covid19 where id=?", id).then(data => data);
         },
     },
-    Provincia:{
+  /*  Provincia:{
     casos(provParam){
 
         let res=queryDB("SELECT fallecidos FROM info_covid19 WHERE id_prov=?",provParam.id).then(data => data);
@@ -24,7 +30,7 @@ const resolversCovid = {
            // return queryDB("select  provincia,info_covid19 from info_covid19 where info_covid19.id_prov=?",provParam.id).then(data => data);
     }
     //SELECT *FROM `provincia`,`info_covid19` WHERE provincia.id=info_covid19.id_prov 
-    },
+    },*/
     Mutation: {
         async createProv(root, { provincia }) {
             if (provincia === undefined) return null;
