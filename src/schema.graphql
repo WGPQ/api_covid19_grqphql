@@ -1,0 +1,40 @@
+# TYPE SYSTEM
+# int, Float, Boolean, ID
+
+scalar Date
+
+type Provincia{
+id: Int!
+nombre: String!
+imageurl: String!
+casos:Casos
+}
+
+type Casos{
+    id:Int!
+    id_prov:Int!
+    fecha:Date!
+    confirmados:Int!
+    fallecidos:Int!
+    recuperados:Int!
+}
+input Provinput{
+id: Int!
+nombre: String!
+imageurl: String! 
+ }
+input updateProv{
+id: Int!
+nombre: String!
+imageurl: String!
+}
+type Query{
+    provincia(id: Int): [Provincia]
+    casoscovid19(id:Int):[Casos]
+}
+#Mutation
+type Mutation{
+    deleteProv(id:Int):Boolean
+    createProv(provincia: Provinput):Boolean
+    updateProvInfo(provincia:updateProv):Boolean
+}
