@@ -22,15 +22,13 @@ const resolversCovid = {
             return queryDB("select * from info_covid19 where id=?", id).then(data => data);
         },
     },
-  /*  Provincia:{
-    casos(provParam){
+    Provincia: {
+        casos(provParam) {
 
-        let res=queryDB("SELECT fallecidos FROM info_covid19 WHERE id_prov=?",provParam.id).then(data => data);
-        console.log(res);
-           // return queryDB("select  provincia,info_covid19 from info_covid19 where info_covid19.id_prov=?",provParam.id).then(data => data);
-    }
-    //SELECT *FROM `provincia`,`info_covid19` WHERE provincia.id=info_covid19.id_prov 
-    },*/
+            let res = queryDB("SELECT casos_covid.* from info_covid19,casos_covid WHERE info_covid19.id_caso=casos_covid.id and info_covid19.id_prov=?", provParam.id).then(data => data);
+            return res;
+        }
+    },
     Mutation: {
         async createProv(root, { provincia }) {
             if (provincia === undefined) return null;
